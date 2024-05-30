@@ -251,6 +251,12 @@ body {
   margin-bottom: 20px;
   position: relative;
 }
+.container .left-section form .input-group i {
+  display: none;
+}
+.container .left-section form .input-group i:hover {
+  display: block;
+}
 .container .left-section form .input-group input {
   width: 100%;
   padding: 15px;
@@ -261,6 +267,9 @@ body {
 }
 .container .left-section form .input-group input:focus {
   border: 2px solid black;
+}
+.container .left-section form .input-group input:hover + i {
+  display: block;
 }
 .container .left-section form .input-group i {
   position: absolute;
