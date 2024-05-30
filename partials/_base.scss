@@ -1,0 +1,47 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Nunito Sans", sans-serif;
+
+  -webkit-tap-highlight-color: transparent;
+}
+button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+ul {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+input,
+textarea,
+select {
+  border: none;
+  outline: none;
+  background: none;
+}
+body {
+  // display: flex;
+  color: #45474b;
+  height: 100vh;
+  max-height: max-content;
+  overflow: scroll;
+}
+::-webkit-scrollbar {
+  display: none;
+  // background: transparent;
+  // height: 5px;
+  // width: 5px;
+}
+.no-scroll {
+  overflow: hidden;
+}
