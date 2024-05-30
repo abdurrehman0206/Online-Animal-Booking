@@ -75,7 +75,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		<?php if ($error != '')
 				echo '<p class="error">' . $error . '</p>'; ?>
       </form >
-      <p class="sign-up-text">Already have an account? <a href="#">Sign In</a></p>
+      <p class="sign-up-text">Already have an account? <a href="login.php">Sign In</a></p>
     </div>
     <div class="right-section">
       <div class="img_login">

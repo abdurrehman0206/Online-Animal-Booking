@@ -3,7 +3,7 @@
 session_start();
 
 
-include '../includes/db.php';
+include 'includes/db.php';
 
 
 $username = $password = '';
@@ -34,6 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -67,7 +68,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		<?php if ($error != '')
 				echo '<p class="error">' . $error . '</p>'; ?>
       </form >
-      <p class="sign-up-text">Don't have an account? <a href="#">Sign Up</a></p>
+      <p class="sign-up-text">Don't have an account? <a href="register.php">Sign Up</a></p>
     </div>
     <div class="right-section">
       <div class="img_login">
