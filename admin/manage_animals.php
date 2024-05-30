@@ -6,13 +6,6 @@ include '../includes/db.php';
 // Initialize variables
 $message = '';
 
-// Function to sanitize input data
-function sanitize_data($data) {
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    return $data;
-}
 
 // Check if the form is submitted to add a new animal
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_animal'])) {
@@ -108,7 +101,7 @@ $result = $conn->query($sql);
             ?>
         </table>
     </main>
-	<?php include 'includes/footer.php'; ?>
+	<?php include '../includes/footer.php'; ?>
 
 </body>
 </html>

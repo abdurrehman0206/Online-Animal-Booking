@@ -87,7 +87,7 @@ $result = $conn->query($sql);
 			?>
 		</table>
 	</main>
-	<?php include 'includes/footer.php'; ?>
+	<?php include '../includes/footer.php'; ?>
 
 </body>
 
