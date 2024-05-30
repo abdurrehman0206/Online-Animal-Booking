@@ -1,33 +1,33 @@
 <?php
-// Include the db.php file to establish a database connection
+
 include 'includes/db.php';
 
-// Initialize variables
+
 $username = $password = $confirm_password = '';
 $error = '';
 
-// Check if the form is submitted
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-	// Sanitize input data
+	
 	$username = sanitize_data($_POST['username']);
 	$password = sanitize_data($_POST['password']);
 	$confirm_password = sanitize_data($_POST['confirm_password']);
 
-	// Validate password
+	
 	if ($password != $confirm_password) {
 		$error = "Passwords do not match";
 	} else {
-		// Check if the username already exists
+		
 		$sql = "SELECT id FROM users WHERE username='$username'";
 		$result = execute_query($sql);
 
 		if ($result->num_rows > 0) {
 			$error = "Username already exists";
 		} else {
-			// Insert new user into the database
+	
 			$sql = "INSERT INTO users (username, password) VALUES ('$username', '$password')";
 			if (execute_query($sql)) {
-				// Registration successful, redirect to login page
+	
 				header("Location: login.php");
 				exit;
 			} else {

@@ -1,16 +1,16 @@
 <?php
-// Include the db.php file to establish a database connection
 include '../includes/db.php';
+include 'auth_admin.php'; 
+check_admin_auth();
 
-// Initialize variables
 $message = '';
 
-// Check if the booking status is updated
+
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_status'])) {
 	$booking_id = $_POST['booking_id'];
 	$status = $_POST['status'];
 
-	// Update the booking status in the database
+	
 	$sql = "UPDATE bookings SET status='$status' WHERE id=$booking_id";
 	if ($conn->query($sql) === TRUE) {
 		$message = "Booking status updated successfully";
@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_status'])) {
 	}
 }
 
-// Query to fetch all booking records from the database
+
 $sql = "SELECT bookings.*, users.username, animals.name AS animal_name 
         FROM bookings 
         INNER JOIN users ON bookings.user_id = users.id 
@@ -38,14 +38,7 @@ $result = $conn->query($sql);
 </head>
 
 <body>
-	<header>
-		<h1>Manage Bookings</h1>
-		<nav>
-			<a href="index.php">Dashboard</a>
-			<a href="manage_animals.php">Manage Animals</a>
-			<a href="manage_bookings.php">Manage Bookings</a>
-		</nav>
-	</header>
+<?php include '../includes/admin_header.php'; ?>
 	<main>
 		<h2>Booking Records</h2>
 		<?php if ($message != '')

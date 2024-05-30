@@ -1,8 +1,8 @@
 <?php
-// Include the db.php file to establish a database connection
+
 include 'includes/db.php';
 
-// Fetch all animals from the database
+
 $sql = "SELECT * FROM animals";
 $result = execute_query($sql);
 ?>

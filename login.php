@@ -1,42 +1,36 @@
 <?php
 
-// Start a session
-// session_start();
+session_start();
 
-// Check if the user is already logged in, redirect to dashboard if logged in
-if (isset($_SESSION['user_id'])) {
-	header("Location: admin/index.php");
-	exit;
-}
 
-// Include the db.php file to establish a database connection
-include 'includes/db.php';
+include '../includes/db.php';
 
-// Initialize variables
+
 $username = $password = '';
 $error = '';
 
-// Check if the form is submitted
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-	// Sanitize input data
+	
 	$username = sanitize_data($_POST['username']);
 	$password = sanitize_data($_POST['password']);
 
-	// Check if the username and password are correct
-	$sql = "SELECT * FROM users WHERE username='$username' AND password='$password'";
+	
+	$sql = "SELECT * FROM users WHERE username='$username' AND password='$password' AND role='user'";
 	$result = execute_query($sql);
 
 	if ($result->num_rows == 1) {
-		// Login successful, store user ID in session and redirect to dashboard
+		
 		$row = $result->fetch_assoc();
 		$_SESSION['user_id'] = $row['id'];
-		header("Location: admin/index.php");
+		header("Location: index.php");
 		exit;
 	} else {
-		// Login failed, display error message
+		
 		$error = "Invalid username or password";
 	}
 }
+
 
 
 ?>

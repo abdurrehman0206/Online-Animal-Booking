@@ -1,28 +1,28 @@
  
 <?php
-// Include the db.php file to establish a database connection
 include '../includes/db.php';
+include 'auth_admin.php'; 
+check_admin_auth();
 
-// Initialize variables
 $message = '';
 
 
-// Check if the form is submitted to add a new animal
+
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_animal'])) {
-    // Sanitize and validate input data
+    
     $name = sanitize_data($_POST['name']);
     $species = sanitize_data($_POST['species']);
     $age = intval($_POST['age']);
     $description = sanitize_data($_POST['description']);
 
-    // Upload image file
+    
     $target_dir = "../images/";
     $target_file = $target_dir . basename($_FILES["image"]["name"]);
     $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
     $newFileName = uniqid() . '.' . $imageFileType;
 
     if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_dir . $newFileName)) {
-        // Insert animal record into the database
+        
         $sql = "INSERT INTO animals (name, species, age, description, image) VALUES ('$name', '$species', $age, '$description', '$newFileName')";
         if ($conn->query($sql) === TRUE) {
             $message = "New animal added successfully";
@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_animal'])) {
     }
 }
 
-// Query to fetch all animals from the database
+
 $sql = "SELECT * FROM animals";
 $result = $conn->query($sql);
 ?>
@@ -48,14 +48,7 @@ $result = $conn->query($sql);
     <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
-    <header>
-        <h1>Manage Animals</h1>
-        <nav>
-            <a href="index.php">Dashboard</a>
-            <a href="manage_animals.php">Manage Animals</a>
-            <a href="manage_bookings.php">Manage Bookings</a>
-        </nav>
-    </header>
+<?php include '../includes/admin_header.php'; ?>
     <main>
         <h2>Add New Animal</h2>
         <?php if ($message != '') echo '<p class="message">' . $message . '</p>'; ?>

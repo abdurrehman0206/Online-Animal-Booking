@@ -1,12 +1,12 @@
 <?php
-// Include the db.php file to establish a database connection
+
 include 'includes/db.php';
 
-// Check if the animal ID is provided in the URL
+
 if (isset($_GET['animal_id'])) {
 	$animal_id = intval($_GET['animal_id']);
 
-	// Fetch the animal details from the database
+	
 	$sql = "SELECT * FROM animals WHERE id=$animal_id";
 	$result = execute_query($sql);
 

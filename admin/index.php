@@ -1,6 +1,9 @@
 <?php
-// Include the db.php file to establish a database connection
+
 include '../includes/db.php';
+include 'auth_admin.php'; 
+check_admin_auth();
+
 ?>
 
 <!DOCTYPE html>
@@ -14,14 +17,7 @@ include '../includes/db.php';
 </head>
 
 <body>
-	<header>
-		<h1>Admin Dashboard</h1>
-		<nav>
-			<a href="index.php">Dashboard</a>
-			<a href="manage_animals.php">Manage Animals</a>
-			<a href="manage_bookings.php">Manage Bookings</a>
-		</nav>
-	</header>
+<?php include '../includes/admin_header.php'; ?>
 	<main>
 		<h2>Welcome, Admin!</h2>
 		<p>What would you like to do today?</p>

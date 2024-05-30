@@ -4,10 +4,10 @@
         <a href="index.php">Home</a>
         <a href="animals.php">Animals</a>
         <?php
-        // Start a session
+        
         session_start();
 
-        // Check if the user is logged in
+        
         if (isset($_SESSION['user_id'])) {
             echo '<a href="profile.php">Profile</a>';
             echo '<a href="logout.php">Logout</a>';

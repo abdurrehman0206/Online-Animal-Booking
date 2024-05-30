@@ -1,25 +1,25 @@
 <?php
-// Start a session
+
 session_start();
 
-// Check if the user is not logged in, redirect to login page
+
 if (!isset($_SESSION['user_id'])) {
 	header("Location: login.php");
 	exit;
 }
 
-// Include the db.php file to establish a database connection
+
 include 'includes/db.php';
 
-// Initialize variables
+
 $animal_id = '';
 $message = '';
 
-// Check if the animal ID is provided in the URL
+
 if (isset($_GET['animal_id'])) {
 	$animal_id = intval($_GET['animal_id']);
 
-	// Check if the animal exists in the database
+	
 	$sql = "SELECT * FROM animals WHERE id=$animal_id";
 	$result = execute_query($sql);
 
@@ -30,12 +30,12 @@ if (isset($_GET['animal_id'])) {
 	$message = "Animal ID not provided";
 }
 
-// Check if the form is submitted
+
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['book'])) {
-	// Sanitize input data
+	
 	$user_id = $_SESSION['user_id'];
 
-	// Insert booking record into the database
+	
 	$sql = "INSERT INTO bookings (user_id, animal_id, booking_date, status) VALUES ($user_id, $animal_id, NOW(), 'Pending')";
 	if (execute_query($sql)) {
 		$message = "Booking successful";
