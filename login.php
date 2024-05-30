@@ -1,16 +1,9 @@
 <?php
-
 // Start a session
-// session_start();
-
-// Check if the user is already logged in, redirect to dashboard if logged in
-if (isset($_SESSION['user_id'])) {
-	header("Location: admin/index.php");
-	exit;
-}
+session_start();
 
 // Include the db.php file to establish a database connection
-include 'includes/db.php';
+include '../includes/db.php';
 
 // Initialize variables
 $username = $password = '';
@@ -22,21 +15,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$username = sanitize_data($_POST['username']);
 	$password = sanitize_data($_POST['password']);
 
-	// Check if the username and password are correct
-	$sql = "SELECT * FROM users WHERE username='$username' AND password='$password'";
+	// Check if the username and password are correct for user role
+	$sql = "SELECT * FROM users WHERE username='$username' AND password='$password' AND role='user'";
 	$result = execute_query($sql);
 
 	if ($result->num_rows == 1) {
-		// Login successful, store user ID in session and redirect to dashboard
+		// Login successful, store user ID in session and redirect to user dashboard
 		$row = $result->fetch_assoc();
 		$_SESSION['user_id'] = $row['id'];
-		header("Location: admin/index.php");
+		header("Location: index.php");
 		exit;
 	} else {
 		// Login failed, display error message
 		$error = "Invalid username or password";
 	}
 }
+
 
 
 ?>
@@ -47,15 +41,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Login - Online Animal Booking System</title>
-	<link rel="stylesheet" href="css/styles.css">
+	<title>Login - User - Online Animal Booking System</title>
+	<link rel="stylesheet" href="../css/styles.css">
 </head>
 
 <body>
-	<?php include 'includes/header.php'; ?>
+	<header>
+		<h1>User Login</h1>
+	</header>
 
 	<main>
-		<h2>Login</h2>
 		<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
 			<div class="form-group">
 				<label for="username">Username:</label>
@@ -71,7 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		</form>
 	</main>
 
-	<?php include 'includes/footer.php'; ?>
+	<?php include '../includes/footer.php'; ?>
 </body>
 
 </html>

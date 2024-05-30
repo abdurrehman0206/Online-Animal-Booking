@@ -14,20 +14,27 @@ if ($conn->connect_error) {
 }
 
 // Function to execute SQL queries
-function execute_query($sql)
-{
-    global $conn;
-    $result = $conn->query($sql);
-    return $result;
+if (!function_exists('execute_query')) {
+    // Define the execute_query function
+    function execute_query($sql)
+    {
+        global $conn;
+        return $conn->query($sql);
+    }
 }
 
+
 // Function to sanitize input data
-function sanitize_data($data)
-{
-    global $conn;
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    return $conn->real_escape_string($data);
+
+if (!function_exists('sanitize_data')) {
+    function sanitize_data($data)
+    {
+        global $conn;
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $conn->real_escape_string($data);
+    }
 }
+
 ?>
