@@ -1,11 +1,11 @@
 <?php
-// Start a session
+
 session_start();
 include '../includes/db.php';
 include 'auth_admin.php'; 
 check_admin_auth();
 
-// Fetch all users from the database
+
 $sql = "SELECT * FROM users";
 $result = execute_query($sql);
 ?>

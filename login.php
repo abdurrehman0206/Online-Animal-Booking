@@ -1,32 +1,32 @@
 <?php
-// Start a session
+
 session_start();
 
-// Include the db.php file to establish a database connection
+
 include '../includes/db.php';
 
-// Initialize variables
+
 $username = $password = '';
 $error = '';
 
-// Check if the form is submitted
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-	// Sanitize input data
+	
 	$username = sanitize_data($_POST['username']);
 	$password = sanitize_data($_POST['password']);
 
-	// Check if the username and password are correct for user role
+	
 	$sql = "SELECT * FROM users WHERE username='$username' AND password='$password' AND role='user'";
 	$result = execute_query($sql);
 
 	if ($result->num_rows == 1) {
-		// Login successful, store user ID in session and redirect to user dashboard
+		
 		$row = $result->fetch_assoc();
 		$_SESSION['user_id'] = $row['id'];
 		header("Location: index.php");
 		exit;
 	} else {
-		// Login failed, display error message
+		
 		$error = "Invalid username or password";
 	}
 }
